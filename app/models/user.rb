@@ -4,10 +4,22 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # FIXME: these should probably be has_many :through =>
+  #   / allow for doing JOINs
   def friends
-    # FIXME: this should probably be a has_many :through =>
-    #   / allow for doing JOINs
     target_ids = Friend.where(source_id: id).pluck :target_id
     User.find target_ids
+  end
+
+  def received_recommendations
+    Recommendation.where(recipient: self)
+  end
+
+  def friend! other
+    Friends.where(source_id: id, target_id: other.id).first_or_create!
+  end
+
+  def unfriend! other
+    Friends.where(source_id: id, target_id: other.id).delete_all
   end
 end
