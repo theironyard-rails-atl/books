@@ -23,6 +23,6 @@ This could be done with Angular or raw jQuery, as you prefer.
 
 Some opportunities for further client side practice, if you've finished those and want to go further -
 
-* Be able to friend / unfriend users without leaving the user index view
+* Be able to friend / unfriend users by clicking a button next to their posted reviews
 * Periodically check for new recommendations and display a message when new ones are recieved
 * Make AJAX calls to Amazon to fetch actual book data / images from the client side
