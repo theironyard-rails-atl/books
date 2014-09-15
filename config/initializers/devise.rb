@@ -231,6 +231,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :amazon, ENV["AMAZON_APP_ID"], ENV["AMAZON_APP_SECRET"]
+  config.omniauth :twitter, ENV["TWITTER_KEY"], ENV["TWITTER_SECRET"]
 
 
   # ==> Warden configuration
