@@ -21,7 +21,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new create_params
-    GoogleBooksLookup.book_lookup(@book)
+    @book.book_data_lookup
     if @book.save
       render :show
     else

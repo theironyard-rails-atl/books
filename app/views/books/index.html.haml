@@ -1,4 +1,15 @@
 .row
   .col-md-2
-  .col-md-8
+  .col-md-8(ng-controller="booksCtrl" ng-init="booksIndex()")
+    .media(ng-repeat="book in bookData.books")
+      %a.pull-left(ng-href="")
+        %img.media-object.book-thumbnail(src="{{bookImage(book)}}" alt="")
+      .media-body
+        %h4.media-heading
+          = '{{book.title}}'
+          %small= '{{book.author}}'
+        %p=  '{{book.description}}'
+        %small.pull-left= 'Categories: {{book.categories}}'
+        %em.pull-right= 'ISBN: {{book.isbn}}'
+      %hr
   .col-md-2
