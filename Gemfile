@@ -14,6 +14,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'cancancan'
+gem 'hashie'
+gem 'omniauth'
+gem 'omniauth-amazon'
+gem 'figaro'
 
 group :development do
   gem 'better_errors'
