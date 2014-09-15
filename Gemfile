@@ -16,6 +16,7 @@ gem 'devise'
 gem 'cancancan'
 
 gem 'omniauth-facebook'
+gem 'omniauth-amazon'
 
 group :development do
   gem 'better_errors'
