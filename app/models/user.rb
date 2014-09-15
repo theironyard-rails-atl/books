@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+<<<<<<< HEAD
+=======
+
+>>>>>>> e40eb05660d2d22227be869c637860eca7fdd3d9
   has_many :identities
 
   # FIXME: these should probably be has_many :through =>
