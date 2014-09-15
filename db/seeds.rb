@@ -8,3 +8,4 @@
 
 
 u = User.create!(email: "riaz.n.virani@gmail.com", password: "password")
+b = Books.create!(isbn: "0545010225")

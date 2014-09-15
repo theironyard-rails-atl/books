@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :created_books, :class_name => 'Book', :foreign_key => 'created_by'
+
   # FIXME: these should probably be has_many :through =>
   #   / allow for doing JOINs
   def friends

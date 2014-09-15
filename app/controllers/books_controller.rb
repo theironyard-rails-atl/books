@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  respond_to :html, :json
 
   def reviews
     @book = Book.find params[:id]
@@ -20,6 +21,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new create_params
+    GoogleBooksLookup.book_lookup(@book)
     if @book.save
       render :show
     else
