@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: recommendations
+#
+#  id           :integer          not null, primary key
+#  sender_id    :integer
+#  recipient_id :integer
+#  book_id      :integer
+#  text         :text
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class Recommendation < ActiveRecord::Base
   belongs_to :sender, class_name: "User"
   belongs_to :recipient, class_name: "User"
