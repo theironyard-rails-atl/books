@@ -18,6 +18,7 @@ gem 'hashie'
 gem 'omniauth'
 gem 'omniauth-amazon'
 gem 'figaro'
+gem 'annotate'
 
 group :development do
   gem 'better_errors'
