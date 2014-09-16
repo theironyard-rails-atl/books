@@ -23,13 +23,13 @@ describe BooksController do
     expect( response.json.length ).to eq 3
   end
 
-  pending 'can index books' do
+  it 'can index books' do
     2.times { create :book }
     get :index
     expect( response ).to be_successful
   end
 
-  pending 'can show a book' do
+  it 'can show a book' do
     book = create :book
     get :show, id: book.id
     expect( response ).to be_successful

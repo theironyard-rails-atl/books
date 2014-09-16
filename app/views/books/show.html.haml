@@ -18,23 +18,24 @@
   %input.btn.btn-default{ type: 'submit', value: 'Save' }
 
 
-.recommendation-modal.modal.fade
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} &times;
-          %span.sr-only Close
-        %h4.modal-title Recommend to a Friend
-      .modal-body
-        %form
-          %select{ name: 'recommendation[recipient_id]' }
-            - current_user.messagable_friends.each do |u|
-              %option{ value: u.id }= u.email
-          %textarea.form-control{ name: 'recommendation[text]', placeholder: 'Include a message', rows: 10 }
-      .modal-footer
-        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-        %button.btn.btn-primary.submit Send
+- if current_user
+  .recommendation-modal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+            %span.sr-only Close
+          %h4.modal-title Recommend to a Friend
+        .modal-body
+          %form
+            %select{ name: 'recommendation[recipient_id]' }
+              - current_user.messagable_friends.each do |u|
+                %option{ value: u.id }= u.email
+            %textarea.form-control{ name: 'recommendation[text]', placeholder: 'Include a message', rows: 10 }
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          %button.btn.btn-primary.submit Send
 
 
 %hr
