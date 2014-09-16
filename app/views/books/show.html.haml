@@ -42,7 +42,7 @@
 
 
 %section.reviews
-  - @book.reviews.each do |review|
+  - @book.reviews.includes(:user).each do |review|
     .well
       .row
         .col-xs-2
@@ -76,9 +76,10 @@
         success: function(review) {
           $('.reviews').prepend( $('<div class="well"><div class="row"><div class="col-xs-2"><p>' + review.user.email + '</p></div><div class="col-xs-10"></div><strong>' + review.rating + '/ 5</strong><p>' + review.text + '</p></div></div>') );
         },
-        error: function(e, text) {
-          console.log('Error was', e);
-          alert('AJAX error: ' + text);
+        error: function(response) {
+          // FIXME: get errors from response
+          console.log(response);
+          alert('Error was: ' + response.errors);
         }
       });
 
