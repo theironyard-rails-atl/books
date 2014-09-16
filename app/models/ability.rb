@@ -5,7 +5,7 @@ class Ability
     user ||= User.new
 
     can :manage, Book do |book|
-      book.created_by = user.id
+      book.created_by == user.id
     end
 
   end

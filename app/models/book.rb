@@ -2,6 +2,9 @@ class Book < ActiveRecord::Base
 
   validates_presence_of :title, :author, :isbn, :description
   has_and_belongs_to_many :categories
+  belongs_to :creator, class_name: 'User', foreign_key: 'created_by'
+  has_many :recommendations
+  has_many :reviews
 
   def book_data_lookup
     return false unless self.isbn
