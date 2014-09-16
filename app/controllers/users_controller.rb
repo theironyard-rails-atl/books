@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  return_json
+
   def friend
     current_user.friend!(User.find params[:id])
     head :ok
