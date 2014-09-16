@@ -229,9 +229,10 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :facebook, '1521559694748504', '6f5c46d54a9f2d82c93cb14775771f10'
+  config.omniauth :facebook, ENV["FACEBOOK_ID"], ENV["FACEBOOK_SECRET"] 
+  config.omniauth :amazon, ENV["AMAZON_ID"], ENV["AMAZON_SECRET"]  
+  #config.omniauth :google_oauth2, ENV["GOOGLE_ID"], ENV["GOOGLE_SECRET"]  
 
-  config.omniauth :amazon, 'amzn1.application-oa2-client.2ca847fe817f44cdaa8ce41124257d1e', '9cb65f8a5d7c8cc9d68e53e8640cecf54912b235ee1bd6b88069f12e32289771'
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
