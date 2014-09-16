@@ -15,6 +15,6 @@
 //= require bootstrap
 //= require angular
 //= require ngInfiniteScroll
-//= require ui-bootstrap-0.11.0.min
+//= require ui-bootstrap-tpls-0.11.0.min
 //= require app
 //= require_tree .

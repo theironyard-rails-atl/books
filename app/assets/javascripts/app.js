@@ -1,1 +1,1 @@
-var app = angular.module("booksApp", ['infinite-scroll', 'ui-bootstrap']);
+var app = angular.module("booksApp", ['infinite-scroll', 'ui.bootstrap']);
