@@ -1,0 +1,65 @@
+%h1
+  = @book.title
+  %small by #{@book.author}
+
+%img.cover{ src: @book.image_url }
+
+%p= @book.description
+
+%button.btn.btn-default.add-review
+  Add Review
+%button.btn.btn-default.make-recommendation
+  Recommend to a Friend
+
+%form.add-review-form{ 'data-id' => @book.id }
+  %input.form-control{ name: 'review[rating]', type: :number, min: 1, max: 5, placeholder: 'Rating (1-5)' }
+  %textarea.form-control{ name: 'review[text]', placeholder: 'Review', rows: 10 }
+  %input.btn.btn-default{ type: 'submit', value: 'Save' }
+
+%hr
+
+%section.reviews
+  - @book.reviews.each do |review|
+    .well
+      .row
+        .col-xs-2
+          %p= review.user.email
+        .col-xs-10
+          %strong #{review.rating} / 5
+          %p= review.text
+
+:javascript
+  $(function() {
+    // -- Reviews -----
+    var reviewForm = $('.add-review-form')
+      , id = reviewForm.data('id');
+
+    reviewForm.hide();
+
+    $('.add-review').click(function() {
+      reviewForm.slideToggle();
+    });
+
+    reviewForm.submit(function(e) {
+      // Alternative to returning `false`
+      e.preventDefault();
+
+      console.log('Serialized data is', reviewForm.serialize());
+
+      $.ajax('/books/' + id + '/review', {
+        type: 'POST',
+        data: reviewForm.serialize(),
+        success: function(review) {
+          $('.reviews').prepend( $('<div class="well"><div class="row"><div class="col-xs-2"><p>' + review.user.email + '</p></div><div class="col-xs-10"></div><strong>' + review.rating + '/ 5</strong><p>' + review.text + '</p></div></div>') );
+        },
+        error: function(e, text) {
+          console.log('Error was', e);
+          alert('AJAX error: ' + text);
+        }
+      });
+
+      reviewForm.slideToggle();
+    });
+
+    // -- Recommendations -----
+  });
