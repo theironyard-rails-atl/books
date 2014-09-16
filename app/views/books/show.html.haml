@@ -11,12 +11,34 @@
 %button.btn.btn-default.make-recommendation
   Recommend to a Friend
 
+
 %form.add-review-form{ 'data-id' => @book.id }
   %input.form-control{ name: 'review[rating]', type: :number, min: 1, max: 5, placeholder: 'Rating (1-5)' }
   %textarea.form-control{ name: 'review[text]', placeholder: 'Review', rows: 10 }
   %input.btn.btn-default{ type: 'submit', value: 'Save' }
 
+
+.recommendation-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+          %span.sr-only Close
+        %h4.modal-title Recommend to a Friend
+      .modal-body
+        %form
+          %select{ name: 'recommendation[recipient_id]' }
+            - current_user.messagable_friends.each do |u|
+              %option{ value: u.id }= u.email
+          %textarea.form-control{ name: 'recommendation[text]', placeholder: 'Include a message', rows: 10 }
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        %button.btn.btn-primary.submit Send
+
+
 %hr
+
 
 %section.reviews
   - @book.reviews.each do |review|
@@ -27,6 +49,7 @@
         .col-xs-10
           %strong #{review.rating} / 5
           %p= review.text
+
 
 :javascript
   $(function() {
@@ -61,5 +84,27 @@
       reviewForm.slideToggle();
     });
 
+
     // -- Recommendations -----
+    var recModal = $('.recommendation-modal');
+    $('.make-recommendation').click(function() {
+      recModal.modal('show');
+    });
+
+    recModal.find('.submit').click(function() {
+      recModal.modal('hide');
+
+      $.ajax('/books/' + id + '/recommend', {
+        type: 'POST',
+        data: recModal.find('form').serialize(),
+        success: function(recommendation) {
+          console.log(recommendation);
+          alert('Message sent to ' + recommendation.user.email);
+        },
+        error: function(e, text) {
+          console.log('Error was', e);
+          alert('AJAX error: ' + text);
+        }
+      });
+    });
   });

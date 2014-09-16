@@ -22,4 +22,11 @@ class User < ActiveRecord::Base
   def unfriend! other
     Friend.where(source_id: id, target_id: other.id).delete_all
   end
+
+  # This is the reverse of the friends relation; see
+  # the comment above
+  def messagable_friends
+    source_ids = Friend.where(target_id: id).pluck :source_id
+    User.find source_ids
+  end
 end
