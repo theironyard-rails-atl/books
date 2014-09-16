@@ -16,10 +16,10 @@ class User < ActiveRecord::Base
   end
 
   def friend! other
-    Friends.where(source_id: id, target_id: other.id).first_or_create!
+    Friend.where(source_id: id, target_id: other.id).first_or_create!
   end
 
   def unfriend! other
-    Friends.where(source_id: id, target_id: other.id).delete_all
+    Friend.where(source_id: id, target_id: other.id).delete_all
   end
 end
