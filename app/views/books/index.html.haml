@@ -1,0 +1,7 @@
+- @books.each do |book|
+  .well
+    %h1
+      = link_to book.title, book
+      %small by #{book.author}
+    %img.cover{ src: book.image_url }
+    %p= book.description

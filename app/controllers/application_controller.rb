@@ -22,9 +22,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def self.return_json *args
+    before_filter :set_json_format, *args
+  end
+
+private
+
 
   def render_invalid obj
     render json: { errors: obj.errors.full_messages }, status: 422
+  end
+
+  def set_json_format
+    request.format = :json
   end
 
 end
