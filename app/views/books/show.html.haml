@@ -10,7 +10,7 @@
     %p= @book.description
 
     - unless current_user.reviewed_book?(@book)
-      %button.btn.btn-default.add-review
+      %button.btn.btn-default(ng-click="showReviewForm = !showReviewForm")
         Add Review
     - if current_user
       %button.btn.btn-default.make-recommendation
@@ -28,14 +28,15 @@
           .panel-body
             %p= review.text
     -# Review Form
-    %form.add-review-form{ 'data-id' => @book.id, 'ng-controller' => 'reviewFormCtrl as reviewForm' }
+    %div(ng-show="showReviewForm")
       %h6.pull-left New Review
-      %rating.pull-right(ng-model="rate" max="max" on-hover="hoveringOver(value)" on-leave="overStar = null")
-      %span.label.pull-right(ng-class='{"label-warning": overStar<=2, "label-info": overStar>2 && overStar<4, "label-success": overStar>=4}' ng-show='overStar')= '{{overStar}}'
-      %input.form-control(type= "hidden" name="review[rating]" ng-value='rate')
-      %textarea.form-control{ name: 'review[text]', placeholder: 'Review', rows: 10 }
-      %input.btn.btn-default{ type: 'submit', value: 'Save' }
-    %hr
+      %form{ 'name' => 'reviewForm', 'data-id' => @book.id, 'ng-controller' => 'reviewFormCtrl', "novalidate" => 'novalidate', 'ng-submit' => 'submitForm(reviewForm.$valid)'  }
+        %rating.pull-right(ng-model="reviewForm.rating" max="max" on-hover="hoveringOver(value)" on-leave="overStar = null")
+        %span.label.pull-right(ng-class='{"label-warning": overStar<=2, "label-info": overStar>2 && overStar<4, "label-success": overStar>=4}' ng-show='overStar')= '{{overStar}}'
+        %input.form-control(type= "hidden" name="review[rating]" ng-value='reviewForm.rating')
+        %textarea.form-control(name= 'review[text]' rows= 5 ng-model="reviewForm.text" placeholder="Enter your review")
+        %button.pull-right.btn.btn-default{ type: 'submit' } Submit
+      %hr
   .col-md-2
 
 

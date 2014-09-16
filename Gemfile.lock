@@ -71,6 +71,11 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    gon (5.2.0)
+      actionpack (>= 2.3.0)
+      json
+      multi_json
+      request_store (>= 1.0.5)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -138,6 +143,7 @@ GEM
     rake (10.3.2)
     rdoc (4.1.2)
       json (~> 1.4)
+    request_store (1.1.0)
     rspec-core (3.1.2)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.0)
@@ -210,6 +216,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   figaro
+  gon
   haml-rails
   httparty
   jbuilder (~> 2.0)
