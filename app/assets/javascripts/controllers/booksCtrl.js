@@ -12,7 +12,7 @@ app.controller("booksCtrl", function($scope, $http, $location) {
 //  Getting Data from the Site via AJAX
   $scope.booksIndex = function() {
     $http({
-      url: $location.absUrl() + ".json",
+      url: window.location.origin + "/books.json",
       method: "GET"
     }).success(function(data, status, headers, config) {
       $scope.bookData = data.books;

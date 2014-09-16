@@ -1,23 +1,46 @@
-%h1
-  = @book.title
-  %small by #{@book.author}
+.row
+  .col-md-2
+  .col-md-8
+    %h1
+      = @book.title
+      %small by #{@book.author}
 
-%img.cover{ src: @book.image_url }
+    %img.cover{ src: @book.image_url }
 
-%p= @book.description
+    %p= @book.description
 
-%button.btn.btn-default.add-review
-  Add Review
-%button.btn.btn-default.make-recommendation
-  Recommend to a Friend
+    - unless current_user.reviewed_book?(@book)
+      %button.btn.btn-default.add-review
+        Add Review
+    - if current_user
+      %button.btn.btn-default.make-recommendation
+        Recommend to a Friend
+
+    -#  Reviews
+    %section.reviews
+      %h4.text-center Reviews
+      - @book.reviews.each do |review|
+        .panel.panel-default
+          .panel-heading.clearfix
+            %h6
+              %strong= review.user.email
+              %span.pull-right #{review.rating} / 5
+          .panel-body
+            %p= review.text
+    -# Review Form
+    %form.add-review-form{ 'data-id' => @book.id, 'ng-controller' => 'reviewFormCtrl as reviewForm' }
+      %h6.pull-left New Review
+      %rating.pull-right(ng-model="rate" max="max" on-hover="hoveringOver(value)" on-leave="overStar = null")
+      %span.label.pull-right(ng-class='{"label-warning": overStar<=2, "label-info": overStar>2 && overStar<4, "label-success": overStar>=4}' ng-show='overStar')= '{{overStar}}'
+      %input.form-control(type= "hidden" name="review[rating]" ng-value='rate')
+      %textarea.form-control{ name: 'review[text]', placeholder: 'Review', rows: 10 }
+      %input.btn.btn-default{ type: 'submit', value: 'Save' }
+    %hr
+  .col-md-2
 
 
-%form.add-review-form{ 'data-id' => @book.id }
-  %input.form-control{ name: 'review[rating]', type: :number, min: 1, max: 5, placeholder: 'Rating (1-5)' }
-  %textarea.form-control{ name: 'review[text]', placeholder: 'Review', rows: 10 }
-  %input.btn.btn-default{ type: 'submit', value: 'Save' }
 
-
+-# Recommendation Modal
 - if current_user
   .recommendation-modal.modal.fade
     .modal-dialog
@@ -38,74 +61,3 @@
           %button.btn.btn-primary.submit Send
 
 
-%hr
-
-
-%section.reviews
-  - @book.reviews.each do |review|
-    .well
-      .row
-        .col-xs-2
-          %p= review.user.email
-        .col-xs-10
-          %strong #{review.rating} / 5
-          %p= review.text
-
-
-:javascript
-  $(function() {
-    // -- Reviews -----
-    var reviewForm = $('.add-review-form')
-      , id = reviewForm.data('id');
-
-    reviewForm.hide();
-
-    $('.add-review').click(function() {
-      reviewForm.slideToggle();
-    });
-
-    reviewForm.submit(function(e) {
-      // Alternative to returning `false`
-      e.preventDefault();
-
-      console.log('Serialized data is', reviewForm.serialize());
-
-      $.ajax('/books/' + id + '/review', {
-        type: 'POST',
-        data: reviewForm.serialize(),
-        success: function(review) {
-          $('.reviews').prepend( $('<div class="well"><div class="row"><div class="col-xs-2"><p>' + review.user.email + '</p></div><div class="col-xs-10"></div><strong>' + review.rating + '/ 5</strong><p>' + review.text + '</p></div></div>') );
-        },
-        error: function(e, text) {
-          console.log('Error was', e);
-          alert('AJAX error: ' + text);
-        }
-      });
-
-      reviewForm.slideToggle();
-    });
-
-
-    // -- Recommendations -----
-    var recModal = $('.recommendation-modal');
-    $('.make-recommendation').click(function() {
-      recModal.modal('show');
-    });
-
-    recModal.find('.submit').click(function() {
-      recModal.modal('hide');
-
-      $.ajax('/books/' + id + '/recommend', {
-        type: 'POST',
-        data: recModal.find('form').serialize(),
-        success: function(recommendation) {
-          console.log(recommendation);
-          alert('Message sent to ' + recommendation.user.email);
-        },
-        error: function(e, text) {
-          console.log('Error was', e);
-          alert('AJAX error: ' + text);
-        }
-      });
-    });
-  });

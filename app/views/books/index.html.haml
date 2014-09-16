@@ -7,8 +7,8 @@
       %tab(heading="Vertical 1")
       %tab(heading="Vertical 2")
   .col-md-8(ng-controller="booksCtrl" ng-init="booksIndex()" infinite-scroll="loadMore()" infinite-scroll-distance="1")
-    .media(ng-repeat="book in showingBooks")
-      %a.pull-left(ng-href="")
+    %a.media(ng-repeat="book in showingBooks" ng-href= '/books/{{book.id}}')
+      .pull-left
         %img.media-object.book-thumbnail(src="{{bookImage(book)}}" alt="")
       .media-body
         %h4.media-heading
