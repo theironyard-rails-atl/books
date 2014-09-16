@@ -13,12 +13,20 @@ describe UsersController do
     expect( response.json.length ).to eq 3
   end
 
-  it 'can friend and unfriend users' do
+  it 'can friend users' do
+    # params = { id: 2 }
     post :friend, id: @alice.id
     expect( response ).to be_successful
+    # Rspec matcher for
+    # expect( response.successful? ).to eq true
 
     get :friends
     expect( response.json.length ).to eq 1
+  end
+
+  it 'can unfriend users' do
+    # define a belongs_to or use ids ...
+    Friend.create! source_id: @me, target_id: @alice
 
     post :unfriend, id: @alice.id
     expect( response ).to be_successful

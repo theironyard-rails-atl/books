@@ -9,7 +9,8 @@ describe User do
   it 'can friend a user' do
     @user.friend! @other
     expect( @user.friends ).to include @other
-    expect( @other.friends ).not_to include @other
+    # expect( @other.friends ).not_to include @other
+    expect( @other.friends ).not_to include @user
   end
 
   it 'can unfriend a user' do

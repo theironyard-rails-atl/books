@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
+  # before_filter :set_json_format
   return_json
 
   def friend
     current_user.friend!(User.find params[:id])
+    # Send back an empty response - no content, just not an error
     head :ok
   end
 
@@ -13,6 +15,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    # render :index
   end
 
   def friends
