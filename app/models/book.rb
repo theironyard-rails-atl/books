@@ -5,7 +5,8 @@ class Book < ActiveRecord::Base
 
   def book_data_lookup
     return false unless self.isbn
-    data = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=+isbn:#{self.isbn}")
+    data = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=+isbn:#{self.isbn}&key=#{ENV['GOOGLE_BOOKS_API']}")
+    puts(self.isbn)
     if data["totalItems"] == 1
       item = data["items"][0]["volumeInfo"]
       self.title ||= item["title"]
@@ -15,14 +16,12 @@ class Book < ActiveRecord::Base
         self.image_url = item["imageLinks"]["thumbnail"]
       end
       item["categories"].each do |category_string|
-        binding.pry
         category = Category.find_by_name category_string
         if category
           self.categories.push category
         else
           self.categories.new(name: category_string)
         end
-
       end
     end
   end

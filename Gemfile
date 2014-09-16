@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+
+source 'https://rails-assets.org'
 
 ruby '2.1.2'
 
@@ -8,13 +9,18 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'haml-rails'
 gem 'httparty'
-
-gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'figaro'
 
 gem 'devise'
 gem 'cancancan'
+
+gem 'rails-assets-jquery'
+gem 'rails-assets-bootstrap'
+gem 'rails-assets-angular'
+gem 'rails-assets-ngInfiniteScroll'
+gem 'rails-assets-fontawesome'
 
 group :development do
   gem 'better_errors'

@@ -10,6 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= app
-//= controllers
+//=
+//= require jquery
+//= require bootstrap
+//= require angular
+//= require ngInfiniteScroll
+//= require ui-bootstrap-0.11.0.min
+//= require app
 //= require_tree .

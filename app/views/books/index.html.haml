@@ -1,7 +1,10 @@
 .row
-  .col-md-2
-  .col-md-8(ng-controller="booksCtrl" ng-init="booksIndex()")
-    .media(ng-repeat="book in bookData.books")
+  .col-md-1
+  .col-md-4
+    %h4 Categories
+
+  .col-md-6(ng-controller="booksCtrl" ng-init="booksIndex()" infinite-scroll="loadMore()" infinite-scroll-distance="1")
+    .media(ng-repeat="book in showingBooks")
       %a.pull-left(ng-href="")
         %img.media-object.book-thumbnail(src="{{bookImage(book)}}" alt="")
       .media-body
@@ -9,7 +12,9 @@
           = '{{book.title}}'
           %small= '{{book.author}}'
         %p=  '{{book.description}}'
-        %small.pull-left= 'Categories: {{book.categories}}'
-        %em.pull-right= 'ISBN: {{book.isbn}}'
+        %small.pull-left
+          Categories:
+          = '{{book.categories.join(" ")}}'
+        %small.pull-right= 'ISBN: {{book.isbn}}'
       %hr
-  .col-md-2
+  .col-md-1
