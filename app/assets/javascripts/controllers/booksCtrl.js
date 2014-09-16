@@ -1,4 +1,4 @@
-app.controller("booksCtrl", function($scope, $http, $location) {
+app.controller("booksCtrl", function($scope, $http) {
 //  Variable initialization
   $scope.bookData = [];
   $scope.showingBooks = [];

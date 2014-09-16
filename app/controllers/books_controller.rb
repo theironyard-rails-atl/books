@@ -1,7 +1,8 @@
 class BooksController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :reviews]
   skip_before_filter :verify_authenticity_token
-  respond_to :html, :json
+  return_json only: [:review, :recommend]
+  respond_to :html, :only => [:index, :show]
 
   def reviews
     @reviews = Book.find(params[:id]).reviews
@@ -17,6 +18,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find params[:id]
+    gon.book_id = @book.id
   end
 
   def create

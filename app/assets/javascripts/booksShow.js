@@ -1,34 +1,31 @@
 $(function() {
   // -- Reviews -----
-  var reviewForm = $('.add-review-form')
-    , id = reviewForm.data('id');
 
-  reviewForm.hide();
 
-  $('.add-review').click(function() {
-    reviewForm.slideToggle();
-  });
+//  $('.add-review').click(function() {
+//    reviewForm.slideToggle();
+//  });
 
-  reviewForm.submit(function(e) {
+//  reviewForm.submit(function(e) {
     // Alternative to returning `false`
-    e.preventDefault();
+//    e.preventDefault();
 
-    console.log('Serialized data is', reviewForm.serialize());
+//    console.log('Serialized data is', reviewForm.serialize());
 
-    $.ajax('/books/' + id + '/review', {
-      type: 'POST',
-      data: reviewForm.serialize(),
-      success: function(review) {
-        $('.reviews').append( $('<div class="well"><div class="row"><div class="col-xs-2"><p>' + review.user.email + '</p></div><div class="col-xs-10"></div><strong>' + review.rating + '/ 5</strong><p>' + review.text + '</p></div></div>') );
-      },
-      error: function(e, text) {
-        console.log('Error was', e);
-        alert('AJAX error: ' + text);
-      }
-    });
+//    $.ajax('/books/' + id + '/review', {
+//      type: 'POST',
+//      data: reviewForm.serialize(),
+//      success: function(review) {
+//        $('.reviews').append( $('<div class="well"><div class="row"><div class="col-xs-2"><p>' + review.user.email + '</p></div><div class="col-xs-10"></div><strong>' + review.rating + '/ 5</strong><p>' + review.text + '</p></div></div>') );
+//      },
+//      error: function(e, text) {
+//        console.log('Error was', e);
+//        alert('AJAX error: ' + text);
+//      }
+//    });
 
-    reviewForm.slideToggle();
-  });
+//    reviewForm.slideToggle();
+//  });
 
 
   // -- Recommendations -----
