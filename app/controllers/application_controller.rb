@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def self.return_json *args
+    before_filter :set_json_format, *args
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -22,9 +26,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+private
 
   def render_invalid obj
     render json: { errors: obj.errors.full_messages }, status: 422
+  end
+
+  def set_json_format
+    request.format = :json
   end
 
 end

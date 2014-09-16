@@ -120,6 +120,9 @@ GEM
     omniauth-amazon (1.0.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
+    omniauth-google-oauth2 (0.2.5)
+      omniauth (> 1.0)
+      omniauth-oauth2 (~> 1.1)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -242,6 +245,7 @@ DEPENDENCIES
   launchy
   omniauth
   omniauth-amazon
+  omniauth-google-oauth2
   omniauth-twitter
   pry-rails
   quiet_assets
