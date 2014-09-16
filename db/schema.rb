@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140915181848) do
 
-
   create_table "books", force: true do |t|
     t.string   "title"
     t.string   "author"
