@@ -6,11 +6,15 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def self.return_json *args
+    before_filter :set_json_format, *args
+  end
+
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:name)
+      u.permit(:name, :email, :password, :password_confirmation)
     end
   end
 
@@ -22,12 +26,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def self.return_json *args
-    before_filter :set_json_format, *args
-  end
 
 private
-
 
   def render_invalid obj
     render json: { errors: obj.errors.full_messages }, status: 422

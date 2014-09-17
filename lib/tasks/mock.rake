@@ -19,5 +19,4 @@ task :mock do
       FactoryGirl.create :review, book: book, user: reviewer
     end
   end
-
 end

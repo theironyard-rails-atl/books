@@ -15,6 +15,7 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  name                   :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -24,6 +25,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_many :identities
+  has_many :reviews
+
+  #TODO: add friends to users somehow
 
   # FIXME: these should probably be has_many :through =>
   #   / allow for doing JOINs
