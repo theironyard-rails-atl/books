@@ -6,7 +6,7 @@ feature 'BookShelves' do
     
     it 'should not have a viewable index' do
       visit bookshelves_path
-      expect( page ).to have_content "Log in"
+      expect( page ).to have_css '.container', text: 'Sign in'
     end
   end
 
@@ -55,7 +55,6 @@ feature 'BookShelves' do
       expect( page ).to have_css('#create_bookshelf')
       fill_in 'bookshelves_name', :with => 'Test Shelf'
       find('#create_bookshelf').click
-      #save_and_open_page
       expect( page ).to have_content 'Test Shelf'
     end
 
