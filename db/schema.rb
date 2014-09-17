@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916232446) do
+ActiveRecord::Schema.define(version: 20140917035744) do
 
   create_table "authentication_providers", force: true do |t|
     t.string   "name"
@@ -32,18 +32,20 @@ ActiveRecord::Schema.define(version: 20140916232446) do
     t.integer  "created_by"
   end
 
-  create_table "friends", force: true do |t|
-    t.integer  "source_id"
-    t.integer  "target_id"
+  create_table "books_categories", id: false, force: true do |t|
+    t.integer "book_id",     null: false
+    t.integer "category_id", null: false
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "identities", force: true do |t|
-    t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.text     "auth_data"
+  create_table "friends", force: true do |t|
+    t.integer  "source_id"
+    t.integer  "target_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
