@@ -35,9 +35,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # Config for Devise
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
-
   # Config for Bullet
   config.after_initialize do
     Bullet.enable = true
@@ -48,14 +45,16 @@ Rails.application.configure do
 
   # MANDRILL SETUP
   config.action_mailer.smtp_settings = {
-      port: '587',
       address: 'smtp.mandrillapp.com',
+      port: '587',
       user_name: ENV['MANDRILL_USERNAME'],
       password: ENV['MANDRILL_PASSWORD'],
-      domain: "heroku.com",
-      authentication: :plain
   }
 
-  ActionMailer::Base.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
 
 end
