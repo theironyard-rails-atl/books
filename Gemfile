@@ -18,6 +18,7 @@ gem 'devise'
 gem 'cancancan'
 
 gem 'rails-assets-jquery'
+gem 'rails-assets-jquery-ujs'
 gem 'rails-assets-bootstrap'
 gem 'rails-assets-angular'
 gem 'rails-assets-ngInfiniteScroll'
