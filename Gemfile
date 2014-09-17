@@ -17,6 +17,9 @@ gem 'pusher'
 
 gem 'devise'
 gem 'cancancan'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-github'
 
 gem 'rails-assets-jquery'
 gem 'rails-assets-jquery-ujs'
