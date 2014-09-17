@@ -1,3 +1,19 @@
+%h4 Search for a book by it's ISBN in the text box below
+%input.isbn
+%br
+%br
+%button.btn.btn-default.search-book Search
+%br
+%br
+.well.book-saver
+  %img.pic
+  %h6.title
+  %h6.author
+  %h6.description
+  %button.btn.btn-default.save-book Save
+  %br
+  %br
+
 - @books.each do |book|
   .well
     %h1
@@ -5,3 +21,39 @@
       %small by #{book.author}
     %img.cover{ src: book.image_url }
     %p= book.description
+
+:javascript
+  $(function(){
+    //hides the book saver well on page load
+    $('.book-saver').hide();
+    // setup book info hash
+    var book_info = {};
+    //function for saving the book
+    function book_save(title, author, description, pic, isbn){
+      book_info.title = title;
+      book_info.author = author;
+      book_info.description = description;
+      book_info.pic = pic;
+      book_info.isbn = isbn;
+      };
+    //get JSON request that is triggered by button and then saves book info
+    $('.search-book').click(function(){
+      $.getJSON('https://www.googleapis.com/books/v1/volumes?q=isbn:' + $('.isbn').val(),
+        function(response){
+          console.log(response);
+          var book = response.items[0].volumeInfo;
+          //TODO: add something to grab multiple authors if there is more than one
+          var authors = book.authors[0];
+          var description = book.description;
+          var title = book.title;
+          var pic = book.imageLinks.thumbnail;
+          var isbn = book.industryIdentifiers[0].identifier;
+          $('.pic').attr('src', pic);
+          $('.title').text(title);
+          $('.author').text(authors);
+          $('.description').text(description);
+          $('.book-saver').slideDown('slow');
+          book_save(title, authors, description, pic, isbn);
+        })
+      });
+  });
