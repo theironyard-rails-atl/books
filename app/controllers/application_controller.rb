@@ -1,9 +1,11 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-    protect_from_forgery with: :exception
+  protect_from_forgery with: :exception
 
   before_action :authenticate_user!
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user
@@ -15,6 +17,12 @@ class ApplicationController < ActionController::Base
 
   def self.return_json *args
     before_filter :set_json_format, *args
+  end
+
+protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:account_update) << :avatar
   end
 
 private

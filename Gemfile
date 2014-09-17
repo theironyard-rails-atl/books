@@ -17,6 +17,8 @@ gem 'pusher'
 
 gem 'devise'
 gem 'cancancan'
+gem 'paperclip'
+gem 'aws-sdk'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-github'
