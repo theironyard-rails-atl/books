@@ -9,14 +9,14 @@ devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_call
     end
   end
 
-  resources :users, only: [:index] do
+  resources :users, only: [:index, :destroy] do
     member do
       post :friend
       post :unfriend
     end
   end
 
-  resources :bookshelves
+  resources :bookshelves, only: [:index, :create, :destroy]
 
   get '/friends'         => 'users#friends'
   get '/recommendations' => 'books#recommendations'
