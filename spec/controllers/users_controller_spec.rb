@@ -8,9 +8,7 @@ describe UsersController do
     sign_in @me
   end
 
-  it 'can ping a user' do
-    ActionMailer::Base.deliveries.clear
-
+  it 'can ping a user', :mail do
     # Am signed in, from the before :each
     create :book
     request.env["HTTP_REFERER"] = '/'
