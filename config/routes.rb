@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index] do
+  resources :users, only: [:index, :show] do
     member do
       post :friend
       post :unfriend
