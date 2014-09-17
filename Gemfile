@@ -18,8 +18,10 @@ gem 'devise'
 gem 'cancancan'
 
 gem 'rails-assets-jquery'
+gem 'rails-assets-jquery-ujs'
 gem 'rails-assets-bootstrap'
 gem 'rails-assets-angular'
+gem 'rails-assets-angular-pusher'
 gem 'rails-assets-ngInfiniteScroll'
 gem 'rails-assets-fontawesome'
 
@@ -30,6 +32,7 @@ group :development do
   gem 'quiet_assets'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'bullet'
 end
 
 group :development, :test do

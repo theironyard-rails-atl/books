@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :reviews]
   skip_before_filter :verify_authenticity_token
-  return_json only: [:review, :recommend]
+  return_json only: [:review, :reviews, :recommend, :recommendations, :update, :create]
   respond_to :html, :only => [:index, :show]
 
   def reviews
@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    @books = Book.all.includes(:categories)
   end
 
   def show

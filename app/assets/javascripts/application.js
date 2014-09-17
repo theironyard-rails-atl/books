@@ -12,8 +12,10 @@
 //
 //=
 //= require jquery
+//= require jquery-ujs
 //= require bootstrap
 //= require angular
+//= require angular-pusher
 //= require ngInfiniteScroll
 //= require ui-bootstrap-tpls-0.11.0.min
 //= require app
