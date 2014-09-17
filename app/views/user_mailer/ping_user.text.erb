@@ -1,0 +1,10 @@
+Ping!
+=====
+
+This is a ping email. Not much to say ...
+
+We do have access to the user though ...
+
+<%- @user.attributes.each do |key, val| %>
+  <%= key %>: <%= val %>
+<% end %>

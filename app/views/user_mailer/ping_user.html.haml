@@ -1,3 +1,13 @@
 %h1 Ping!
 
 %p This is a ping email. Not much to say ...
+
+%p We do have access to the user though ...
+
+%ul
+  - @user.attributes.each do |key, val|
+    %li
+      %strong= key
+      = val
+
+%p Here's a book: #{link_to @book.title, book_url(@book)}
