@@ -43,8 +43,8 @@ class BooksController < ApplicationController
 
   def review
     book = Book.find params[:id]
-    @review = book.reviews.create!(
-      review_params.merge( user: current_user ))
+    @review = book.reviews.create!(review_params.merge( user: current_user ))
+    Pusher.trigger('reviews', "book_#{book.id}", {book_id: @review.book_id, email: @review.user.email, rating: @review.rating, text: @review.text})
   end
 
   def recommend

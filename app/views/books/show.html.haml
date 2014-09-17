@@ -8,7 +8,7 @@
     %img.cover{ src: @book.image_url }
 
     %p= @book.description
-    - unless current_user && current_user.reviewed_book?(@book)
+    - if current_user && !current_user.reviewed_book?(@book)
       %button.btn.btn-default(ng-click="showReviewForm = !showReviewForm")
         Add Review
     - if current_user
@@ -16,7 +16,7 @@
         Recommend to a Friend
 
     -#  Reviews
-    %section.reviews
+    %section.reviews(ng-controller="reviewsCtrl")
       %h4.text-center Reviews
       - @book.reviews.each do |review|
         .panel.panel-default

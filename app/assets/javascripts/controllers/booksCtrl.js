@@ -4,7 +4,6 @@ app.controller("booksCtrl", function($scope, $http) {
   $scope.showingBooks = [];
   $scope.indexBooksShowing = 5;
 
-
 //  Angular filtering
   $scope.categoryFilter = {};
 
