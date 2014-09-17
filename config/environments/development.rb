@@ -38,7 +38,6 @@ Rails.application.configure do
   # Config for Devise
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
-
   # Config for Paperclip
   Paperclip.options[:command_path] = "/usr/local/bin/identify"
   config.paperclip_defaults = {
@@ -50,4 +49,13 @@ Rails.application.configure do
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
+
+  # Config for Bullet
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.rails_logger = true
+    Bullet.raise = true
+  end
+
 end

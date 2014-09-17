@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :books, only: [:index, :create, :update, :show, :destroy] do
     member do
@@ -19,5 +19,5 @@ Rails.application.routes.draw do
   get '/friends'         => 'users#friends'
   get '/recommendations' => 'books#recommendations'
 
-  root to: "static_pages#home"
+  root to: "books#index"
 end

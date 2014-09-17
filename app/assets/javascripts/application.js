@@ -10,6 +10,13 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//=
 //= require jquery
-//= require jquery_ujs
+//= require jquery-ujs
+//= require bootstrap
+//= require angular
+//= require angular-pusher
+//= require ngInfiniteScroll
+//= require ui-bootstrap-tpls-0.11.0.min
+//= require app
 //= require_tree .

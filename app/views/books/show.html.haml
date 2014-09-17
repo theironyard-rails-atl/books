@@ -1,0 +1,63 @@
+.row
+  .col-md-2
+  .col-md-8
+    %h1
+      = @book.title
+      %small by #{@book.author}
+
+    %img.cover{ src: @book.image_url }
+
+    %p= @book.description
+    - if current_user && !current_user.reviewed_book?(@book)
+      %button.btn.btn-default(ng-click="showReviewForm = !showReviewForm")
+        Add Review
+    - if current_user
+      %button.btn.btn-default.make-recommendation
+        Recommend to a Friend
+
+    -#  Reviews
+    %section.reviews(ng-controller="reviewsCtrl")
+      %h4.text-center Reviews
+      - @book.reviews.each do |review|
+        .panel.panel-default
+          .panel-heading.clearfix
+            %h6
+              %strong= review.user.email
+              %span.pull-right #{review.rating} / 5
+          .panel-body
+            %p= review.text
+    -# Review Form
+    %div(ng-show="showReviewForm")
+      %h6.pull-left New Review
+      %form{ 'name' => 'reviewForm', 'data-id' => @book.id, 'ng-controller' => 'reviewFormCtrl', "novalidate" => 'novalidate', 'ng-submit' => 'submitForm(reviewForm.$valid)'  }
+        %rating.pull-right(ng-model="reviewForm.rating" max="max" on-hover="hoveringOver(value)" on-leave="overStar = null")
+        %span.label.pull-right(ng-class='{"label-warning": overStar<=2, "label-info": overStar>2 && overStar<4, "label-success": overStar>=4}' ng-show='overStar')= '{{overStar}}'
+        %input.form-control(type= "hidden" name="review[rating]" ng-value='reviewForm.rating')
+        %textarea.form-control(name= 'review[text]' rows= 5 ng-model="reviewForm.text" placeholder="Enter your review")
+        %button.pull-right.btn.btn-default{ type: 'submit' } Submit
+      %hr
+  .col-md-2
+
+
+
+-# Recommendation Modal
+- if current_user
+  .recommendation-modal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+            %span.sr-only Close
+          %h4.modal-title Recommend to a Friend
+        .modal-body
+          %form
+            %select{ name: 'recommendation[recipient_id]' }
+              - current_user.messagable_friends.each do |u|
+                %option{ value: u.id }= u.email
+            %textarea.form-control{ name: 'recommendation[text]', placeholder: 'Include a message', rows: 10 }
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          %button.btn.btn-primary.submit Send
+
+

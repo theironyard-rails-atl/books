@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+
+source 'https://rails-assets.org'
 
 ruby '2.1.2'
 
@@ -7,16 +8,28 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'haml-rails'
-
-gem 'jquery-rails'
+gem 'httparty'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'figaro'
+gem 'gon'
+gem 'pusher'
 
 gem 'devise'
 gem 'cancancan'
 gem 'paperclip'
 gem 'aws-sdk'
-gem 'figaro'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-github'
+
+gem 'rails-assets-jquery'
+gem 'rails-assets-jquery-ujs'
+gem 'rails-assets-bootstrap'
+gem 'rails-assets-angular'
+gem 'rails-assets-angular-pusher'
+gem 'rails-assets-ngInfiniteScroll'
+gem 'rails-assets-fontawesome'
 
 group :development do
   gem 'better_errors'
@@ -25,6 +38,7 @@ group :development do
   gem 'quiet_assets'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'bullet'
 end
 
 group :development, :test do
