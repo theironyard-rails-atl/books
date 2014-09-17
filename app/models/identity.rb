@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: identities
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  provider   :string(255)
+#  uid        :string(255)
+#  auth_data  :text
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Identity < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :uid, :provider
