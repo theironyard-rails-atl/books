@@ -22,4 +22,9 @@ class UsersController < ApplicationController
     @users = current_user.friends
     render :index
   end
+
+  def ping
+    UserMailer.ping_user(current_user).deliver
+    redirect_to :back, flash: { success: 'Email sent' }
+  end
 end

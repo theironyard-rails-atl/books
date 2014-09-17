@@ -19,5 +19,7 @@ Rails.application.routes.draw do
   get '/friends'         => 'users#friends'
   get '/recommendations' => 'books#recommendations'
 
+  post '/ping' => 'users#ping'
+
   root to: "static_pages#home"
 end
