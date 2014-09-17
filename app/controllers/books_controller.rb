@@ -1,9 +1,11 @@
 class BooksController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :reviews]
+  skip_before_filter :verify_authenticity_token
+  return_json only: [:review, :reviews, :recommend, :recommendations, :update, :create]
+  respond_to :html, :only => [:index, :show]
 
   def reviews
-    @book = Book.find params[:id]
-    @reviews = @book.reviews
+    @reviews = Book.find(params[:id]).reviews
   end
 
   def recommendations
@@ -11,15 +13,17 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    @books = Book.all.includes(:categories)
   end
 
   def show
     @book = Book.find params[:id]
+    gon.book_id = @book.id
   end
 
   def create
-    @book = Book.new create_params
+    @book = Book.new create_params.merge(creator: current_user)
+    @book.book_data_lookup
     if @book.save
       render :show
     else
@@ -38,11 +42,15 @@ class BooksController < ApplicationController
   end
 
   def review
-    raise "Not yet implemented"
+    book = Book.find params[:id]
+    @review = book.reviews.create!(
+      review_params.merge( user: current_user ))
   end
 
   def recommend
-    raise "Not yet implemented"
+    book = Book.find params[:id]
+    @recommendation = book.recommendations.create!(
+      recommendation_params.merge( sender: current_user ))
   end
 
 private
@@ -55,5 +63,13 @@ private
 
   def update_params
     params.require(:book).permit(:title, :author, :isbn, :image_url, :description)
+  end
+
+  # N.B. This smells like it should be in a ReviewsController
+  def review_params
+    params.require(:review).permit(:rating, :text)
+  end
+  def recommendation_params
+    params.require(:recommendation).permit(:text, :recipient_id)
   end
 end

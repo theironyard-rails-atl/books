@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140917035744) do
   end
 
   add_index "authentication_providers", ["name"], name: "index_name_on_authentication_providers"
+ActiveRecord::Schema.define(version: 20140915212244) do
 
   create_table "books", force: true do |t|
     t.string   "title"
