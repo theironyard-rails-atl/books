@@ -13,14 +13,8 @@
 #  created_by  :integer
 #
 
-class Book < ActiveRecord::Base
-  has_many :reviews
+require 'rails_helper'
 
-  belongs_to :creator, class_name: 'User', foreign_key: 'created_by'
-  has_many :recommendations
-  has_many :reviews
-
-  validates_presence_of :title, :author, :isbn, :description, :image_url
+RSpec.describe Book, :type => :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
-
-#TODO need to figure out reccomendations

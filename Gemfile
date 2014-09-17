@@ -18,12 +18,13 @@ gem 'hashie'
 gem 'omniauth'
 gem 'omniauth-amazon'
 gem 'omniauth-twitter'
+gem "omniauth-google-oauth2"
 gem 'figaro'
 gem 'annotate'
 
 group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  # gem 'better_errors'
+  # gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'spring'

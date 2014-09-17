@@ -42,7 +42,7 @@
 
 
 %section.reviews
-  - @book.reviews.each do |review|
+  - @book.reviews.includes(:user).each do |review|
     .well
       .row
         .col-xs-2
