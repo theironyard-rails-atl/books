@@ -21,6 +21,7 @@ gem 'omniauth-twitter'
 gem "omniauth-google-oauth2"
 gem 'figaro'
 gem 'annotate'
+gem 'gravtastic'
 
 group :development do
   gem 'better_errors'

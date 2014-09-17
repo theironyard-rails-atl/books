@@ -20,12 +20,15 @@
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
+  include Gravtastic
+  gravtastic
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_many :identities
   has_many :reviews
+  has_many :friends
 
   #TODO: add friends to users somehow
 
@@ -34,6 +37,11 @@ class User < ActiveRecord::Base
   def friends
     target_ids = Friend.where(source_id: id).pluck :target_id
     User.find target_ids
+  end
+
+  def friend? id
+    array = self.friends.map { |user| user.id }
+    array.include? (id.to_i)
   end
 
   def received_recommendations
