@@ -14,6 +14,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'cancancan'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-github'
 
 group :development do
   gem 'better_errors'
@@ -35,3 +38,7 @@ group :test do
   gem 'launchy'
   gem 'simplecov'
 end
+
+gem "omniauth"
+gem "omniauth-facebook"
+gem "omniauth-github"
