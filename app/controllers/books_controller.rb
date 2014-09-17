@@ -42,8 +42,13 @@ class BooksController < ApplicationController
 
   def review
     book = Book.find params[:id]
-    @review = book.reviews.create!(
+    @review = book.reviews.new(
       review_params.merge( user: current_user ))
+    if @review.save
+      render :review
+    else
+      render_invalid @review
+    end
   end
 
   def recommend
