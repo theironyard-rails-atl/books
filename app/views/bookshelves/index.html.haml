@@ -1,0 +1,10 @@
+%h1 Your Bookshelves
+= form_for :bookshelves, :url =>{ controller:'bookshelves', action:'create'} do |f|
+  = f.text_field :name
+  = f.submit "Create", id: "create_bookshelf"
+%p
+- @shelves.each do |shelf|
+  .well
+    = button_to 'Delete', bookshelf_path(shelf), { id: "delete_#{shelf.id}", method: 'delete'}
+    %h2
+      = shelf.name
