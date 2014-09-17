@@ -9,7 +9,7 @@ devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_call
     end
   end
 
-  resources :users, only: [:index, :destroy] do
+  resources :users, only: [:index] do
     member do
       post :friend
       post :unfriend
