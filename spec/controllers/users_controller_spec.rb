@@ -8,6 +8,28 @@ describe UsersController do
     sign_in @me
   end
 
+  it 'can ping a user' do
+    ActionMailer::Base.deliveries.clear
+
+    # Am signed in, from the before :each
+    create :book
+    request.env["HTTP_REFERER"] = '/'
+
+    post :ping
+
+    expect( ActionMailer::Base.deliveries.count ).to eq 1
+
+    msg = ActionMailer::Base.deliveries.first
+    expect( msg.to ).to eq [@me.email]
+
+    # Body text contains user's name
+    # Has multiple parts
+    # Has an attachment
+    expect( msg.attachments.count ).to eq 1
+
+    expect( response.redirect? ).to eq true
+  end
+
   it 'can see a list of users' do
     get :index
     expect( response.json.length ).to eq 3
