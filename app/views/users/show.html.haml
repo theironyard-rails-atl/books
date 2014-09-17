@@ -1,0 +1,21 @@
+%h2
+  =@user.name
+
+=image_tag @user.gravatar_url
+%br
+%br
+
+-unless current_user == @user
+  -if current_user.friend?(params[:id])
+    =button_to "Unfriend", unfriend_user_path(@user), :method => :post, :class => "btn btn-primary"
+  -else
+    =button_to "Friend", friend_user_path(@user), :method => :post, :class => "btn btn-primary"
+
+%br
+  
+-unless @user.reviews.empty?
+  %h4 Review
+  -@user.reviews.each do |review|
+    .well
+      %p
+        =review.text

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       post :unfriend
     end
   end
-
+  
   get '/friends'         => 'users#friends'
   get '/recommendations' => 'books#recommendations'
 

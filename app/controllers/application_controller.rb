@@ -26,6 +26,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def self.return_json *args
+    before_filter :set_json_format, *args
+  end
 
 private
 
