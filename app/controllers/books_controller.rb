@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :reviews]
 
   # before_filter :set_json_format, except: [:index, :show]
-  return_json except: [:index, :show]
+  return_json except: [:index, :show, :recommend]
 
   def reviews
     @reviews = Book.find(params[:id]).reviews
@@ -54,6 +54,7 @@ class BooksController < ApplicationController
     book = Book.find params[:id]
     @recommendation = book.recommendations.create!(
       recommendation_params.merge( sender: current_user ))
+    RecommendationMailer.send_recommendation(@recommendation).deliver
   end
 
 private

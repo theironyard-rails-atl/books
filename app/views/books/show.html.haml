@@ -1,3 +1,4 @@
+.alert.alert-success.hide
 %h1
   = @book.title
   %small by #{@book.author}
@@ -35,7 +36,7 @@
             %textarea.form-control{ name: 'recommendation[text]', placeholder: 'Include a message', rows: 10 }
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-          %button.btn.btn-primary.submit Send
+          %button.btn.btn-primary.submit{method: "post"} Send
 
 
 %hr
@@ -101,7 +102,8 @@
         data: recModal.find('form').serialize(),
         success: function(recommendation) {
           console.log(recommendation);
-          alert('Message sent to ' + recommendation.user.email);
+          $(".recommendation_sent").text("Message sent to:" + recommendation.recipient.email).show();
+          //alert('Message sent to ' + recommendation.recipient.email);
         },
         error: function(e, text) {
           console.log('Error was', e);

@@ -21,6 +21,10 @@ gem 'omniauth-facebook'
 gem 'omniauth-amazon'
 gem 'omniauth-google-oauth2'
 
+gem 'markerb'
+gem 'kramdown'
+gem 'letter_opener'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -40,4 +44,6 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
