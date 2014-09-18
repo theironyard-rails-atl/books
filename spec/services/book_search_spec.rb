@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 describe BookSearch do
-  focus 'can perform a basic search' do
-    VCR.use_cassette 'basic_search' do
-      results = BookSearch.new('Potter').run
-      expect( results.count ).to be >= 10
-    end
+  it 'can perform a basic search', :vcr do
+    results = BookSearch.new('Potter').run
+    expect( results.count ).to be >= 10
   end
 
-  it 'can search by author' do
+  it 'can search by author', :vcr do
     results = BookSearch.new('Potter', author: 'Rowling').run
     expect( results.count ).to be >= 7
 
