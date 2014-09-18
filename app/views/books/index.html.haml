@@ -1,3 +1,8 @@
+= form_tag books_search_path, method: 'GET' do
+  /= text_field_tag :search, id: 'search_input'
+  %input#search_input{ type: 'text', name: 'search' }
+  = submit_tag 'Search'
+
 - @books.each do |book|
   .well
     %h1

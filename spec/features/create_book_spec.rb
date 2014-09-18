@@ -9,7 +9,7 @@ feature 'Book search' do
   it 'lets a user search for a book to add' do
     visit books_path
 
-    fill_in '#search_input', with: 'Potter'
+    fill_in 'search_input', with: 'Potter'
     click_on 'Search'
 
     expect( page.find('.results') ).to have_content 'Potter'
