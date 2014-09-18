@@ -90,8 +90,11 @@ GEM
     jwt (1.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
-    mail (2.6.1)
-      mime-types (>= 1.16, < 3)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (2.3)
     mini_portile (0.6.0)
@@ -232,6 +235,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  letter_opener
   omniauth
   omniauth-amazon
   omniauth-google-oauth2

@@ -22,6 +22,7 @@ class BooksController < ApplicationController
   end
 
   def create
+    #TODO: add a check so that people can't add duplicate books
     @book = Book.new create_params.merge(creator: current_user)
     if @book.save
       render :show

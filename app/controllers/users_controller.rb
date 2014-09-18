@@ -3,15 +3,19 @@ class UsersController < ApplicationController
   return_json except: :show
 
   def friend
-    current_user.friend!(User.find params[:id])
+    friend = User.find params[:id]
+    current_user.friend!(friend)
     # Send back an empty response - no content, just not an error
     #head :ok
+    UserMailer.friend_email(friend).deliver
     redirect_to :back, flash: {success: "User has been successfully friended!"}
   end
 
   def unfriend
+    unfriend = User.find params[:id]
     current_user.unfriend!(User.find params[:id])
     #head :ok
+    UserMailer.unfriend_email(unfriend).deliver
     redirect_to :back, flash: {success: "User has been successfully unfriended."}
   end
 
