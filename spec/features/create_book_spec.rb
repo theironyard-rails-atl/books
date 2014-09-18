@@ -6,7 +6,7 @@ feature 'Book search' do
     login @user
   end
 
-  it 'lets a user search for a book to add' do
+  it 'lets a user search for a book to add', :vcr do
     visit books_path
 
     fill_in 'search_input', with: 'Potter'
