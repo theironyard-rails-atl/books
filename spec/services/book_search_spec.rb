@@ -3,7 +3,7 @@ require 'rails_helper'
 describe BookSearch do
   it 'can perform a basic search' do
     results = BookSearch.new('Potter').run
-    #binding.pry
+    expect( results.count ).to be >= 10
   end
 
   it 'can search by author'

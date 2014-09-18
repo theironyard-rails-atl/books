@@ -12,6 +12,7 @@ class BookSearch
   def run
     # eq. to BookSearch.get _for instances of this class_
     #   but different for subclasses
-    self.class.get '/volumes', query: { q: @search_term }
+    response = self.class.get '/volumes', query: { q: @search_term }
+    response["items"]
   end
 end
