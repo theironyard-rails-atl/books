@@ -69,6 +69,7 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    gravtastic (3.2.6)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -89,6 +90,8 @@ GEM
     jwt (1.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -230,11 +233,13 @@ DEPENDENCIES
   devise
   factory_girl_rails
   figaro
+  gravtastic
   haml-rails
   hashie
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  letter_opener
   omniauth
   omniauth-amazon
   omniauth-google-oauth2

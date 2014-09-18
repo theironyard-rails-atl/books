@@ -21,10 +21,12 @@ gem 'omniauth-twitter'
 gem "omniauth-google-oauth2"
 gem 'figaro'
 gem 'annotate'
+gem 'gravtastic'
 
 group :development do
   # gem 'better_errors'
   # gem 'binding_of_caller'
+  gem 'letter_opener'
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'spring'
