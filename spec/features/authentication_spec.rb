@@ -12,4 +12,8 @@ feature 'Authentication' do
       expect( page ).to have_content @user.email
     end
   end
+
+  describe 'when not logged in' do
+    it 'is not authenticated'
+  end
 end
