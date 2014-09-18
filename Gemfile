@@ -15,8 +15,12 @@ gem 'figaro'
 gem 'gon'
 gem 'pusher'
 gem 'capybara-angular'
+gem 'sidekiq'
+gem 'thin'
+gem 'sinatra', '>= 1.3.0', :require => nil
 
 gem 'devise'
+gem 'devise-async'
 gem 'cancancan'
 gem 'paperclip'
 gem 'aws-sdk'
