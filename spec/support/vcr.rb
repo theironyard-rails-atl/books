@@ -8,7 +8,7 @@ RSpec.configure do |c|
     ex_description = example.metadata[:full_description]
     # replace all whitespace with _s
     cassette_name = ex_description.gsub /\s+/, '_'
-    VCR.use_cassette cassette_name do
+    VCR.use_cassette cassette_name, re_record_interval: 7.days do
       example.run
     end
   end
