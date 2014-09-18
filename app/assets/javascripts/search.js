@@ -37,13 +37,14 @@ $(function(){
     });
   //saves the book to the DB
   $('.save-book').click(function(){
-    var book = {};
-    book.book = book_info;
+    var books = {};
+    books.book = book_info;
     $.ajax("/books", {
       type: 'POST',
-      data: book,
+      data: books,
       dataType: 'json'
       })
+    $('.book-saver').slideUp('slow');
     });
 
   });
