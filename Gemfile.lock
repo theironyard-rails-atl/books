@@ -53,6 +53,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-angular (0.0.4)
+      capybara
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -267,6 +269,7 @@ DEPENDENCIES
   bullet
   cancancan
   capybara
+  capybara-angular
   coffee-rails (~> 4.0.0)
   devise
   factory_girl_rails
