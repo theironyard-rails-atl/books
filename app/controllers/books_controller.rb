@@ -57,6 +57,7 @@ class BooksController < ApplicationController
   end
 
   def search
+    @results = BookSearch.new(params[:search]).run
   end
 
 private
