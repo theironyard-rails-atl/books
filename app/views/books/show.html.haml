@@ -46,9 +46,16 @@
     .well
       .row
         .col-xs-2
-          %p= review.user.email
-        .col-xs-10
-          %strong #{review.rating} / 5
+          =image_tag review.user.gravatar_url, {class: "avatar", size: '100'}
+
+        .col-xs-2
+          %h5= review.user.name || "User Name"
+          %h5= review.user.email
+        .col-xs-4
+          -review.rating.times do
+            %i.fa.fa-star
+          -(5-review.rating).times do
+            %i.fa.fa-star-o
           %p= review.text
 
 
@@ -74,7 +81,11 @@
         type: 'POST',
         data: reviewForm.serialize(),
         success: function(review) {
-          $('.reviews').prepend( $('<div class="well"><div class="row"><div class="col-xs-2"><p>' + review.user.email + '</p></div><div class="col-xs-10"></div><strong>' + review.rating + '/ 5</strong><p>' + review.text + '</p></div></div>') );
+          console.log(review);
+          $('.reviews').prepend( $('<div class="well"><div class="row"><div class="col-xs-2"><img class = "avatar" size "100 src ='
+          + review.gravatar_url + '></img></div><div class="col-xs-2"><h5>' + review.user.name + '</h5><h5>'
+          + review.user.email +'</h5></div><div class="col-xs-4"></div><strong>' + review.rating +
+          '/ 5</strong><p>' + review.text + '</p></div></div>') );
         },
         error: function(response) {
           // FIXME: get errors from response
