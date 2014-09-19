@@ -6,9 +6,8 @@
     .user_information
       %h2=@user.name || "Horse with no name"
       %h4=@user.email
-      %h5 I went to the desert
       %h5="Reviewed #{@user.reviews.count} books."
-      %h5="Has #{@user.friends.count} of friends."
+      %h5="Has #{@user.friends.count} friends."
 
       -unless current_user == @user
         -if current_user.friend?(params[:id])

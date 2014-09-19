@@ -15,6 +15,7 @@ $(function(){
   $('.search-book').click(function(){
     $.getJSON('https://www.googleapis.com/books/v1/volumes?q=isbn:' + $('.isbn').val(),
       function(response){
+        console.log(response);
         if (response.totalItems === 0) {
           alert("No results found");
           }
@@ -61,5 +62,4 @@ $(function(){
     $('.book-saver').slideUp('slow');
     $('.isbn').val('');
     });
-
   });

@@ -1,0 +1,18 @@
+.row.well
+  .col-md-12
+    -@users.each do |u|
+      .row.well
+        .col-md-5
+          =image_tag u.gravatar_url
+          %h3=u.name || u.email
+        .col-md-2
+        .col-md-5
+          %h3 User Info
+          =button_to "View User", user_path(u), :method=> :get, :class => "btn btn-primary"
+          %br
+          %br
+          -unless current_user == u
+            -if current_user.friend?(u.id)
+              =button_to "Unfriend", unfriend_user_path(u), :method => :post, :class => "btn btn-danger"
+            -else
+              =button_to "Friend User", friend_user_path(u), :method => :post, :class => "btn btn-success"
