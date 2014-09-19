@@ -1,0 +1,7 @@
+.row
+  .col-md-2
+  .col-md-8(ng-controller="FriendshipsCtrl")
+    %tabset.friends-content
+      %tab(ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled")
+        = '{{tab.content}}'
+  .col-md-2

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # before_filter :set_json_format
-  return_json
+  return_json except: [:friendships]
 
   def friend
     current_user.friend!(User.find params[:id])
@@ -22,4 +22,9 @@ class UsersController < ApplicationController
     @users = current_user.friends
     render :index
   end
+
+  def friendships
+    @friends = current_user.friends
+  end
+
 end

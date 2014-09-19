@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       post :friend
       post :unfriend
     end
+    collection do
+      get :friendships
+    end
   end
 
   get '/friends'         => 'users#friends'
