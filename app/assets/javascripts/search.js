@@ -15,20 +15,28 @@ $(function(){
   $('.search-book').click(function(){
     $.getJSON('https://www.googleapis.com/books/v1/volumes?q=isbn:' + $('.isbn').val(),
       function(response){
-        var book = response.items[0].volumeInfo;
-        //TODO: add something to grab multiple authors if there is more than one
-        var authors = book.authors[0];
-        var description = book.description;
-        var title = book.title;
-        var image_url = book.imageLinks.thumbnail;
-        var isbn = book.industryIdentifiers[0].identifier;
-        $('.pic').attr('src', image_url);
-        $('.title').text(title);
-        $('.author').text(authors);
-        $('.description').text(description);
-        $('.book-saver').slideDown('slow');
-        book_save(title, authors, description, image_url, isbn);
-      })
+        if(response.totalItems === 0) {
+          alert("No book found.");
+        }
+        else {
+          var book = response.items[0].volumeInfo;
+
+          var authors_array = []
+          for(i =0; i < book.authors.length; i ++){
+            authors_array.push(book.authors[i]);
+          }
+          var authors = authors_array.join(", ");
+          var description = book.description;
+          var title = book.title;
+          var image_url = book.imageLinks.thumbnail;
+          var isbn = book.industryIdentifiers[0].identifier;
+          $('.pic').attr('src', image_url);
+          $('.title').text(title);
+          $('.author').text(authors);
+          $('.description').text(description);
+          $('.book-saver').slideDown('slow');
+          book_save(title, authors, description, image_url, isbn); }
+      });
     });
   //cancel will hide the book saver menu
   $('.cancel').click(function(){
@@ -46,5 +54,4 @@ $(function(){
       })
     $('.book-saver').slideUp('slow');
     });
-
   });
