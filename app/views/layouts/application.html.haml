@@ -13,25 +13,30 @@
     %nav.navbar.navbar-default
       .container
         .navbar-header
-          = link_to root_path, class: "navbar-brand tooltp", "data-toggle"=> "tooltip", "data-placement" => "bottom", title: "Books" do
-            %i.fa.fa-book
+          .navbar-brand=link_to "Friendly Books", root_path
 
-        %ul.nav.navbar-nav
+        %ul.nav.navbar-nav.pull-right
           / Main links will go here
+          %li
+            = link_to root_path, class: "navbar-brand tooltp", "data-toggle"=> "tooltip", "data-placement" => "bottom", title: "Books" do
+              %i.fa.fa-book
           %li
             = link_to users_path, class: 'tooltp', "data-toggle"=> "tooltip", "data-placement" => "bottom", title: "Users" do
               %i.fa.fa-users
-
-        %ul.nav.navbar-nav.pull-right
-          - if current_user
-            / Signed in
-            %li= link_to "#{current_user.name}", user_path(current_user), "class" => ""
-            %li= link_to current_user.email, edit_user_registration_path
-            %li= link_to "Log out", destroy_user_session_path, method: :delete
-          - else
-            / Not signed in
-            %li= link_to "Log in", new_user_session_path
-            %li= link_to "Sign up", new_user_registration_path
+          %li.dropdown
+            %a.btn-btn-default.dropdown-toggle{id:"dropdownMenu1", "data-toggle"=> 'dropdown'}
+              Profile Options
+              %b.caret
+            %ul.dropdown-menu.dropdown-menu-right{role:'menu', 'aria-labelledby'=>"dropdownMenu1"}
+              - if current_user
+                / Signed in
+                %li= link_to "Profile Page", user_path(current_user), "class" => ""
+                %li= link_to "Edit Account", edit_user_registration_path
+                %li= link_to "Log out", destroy_user_session_path, method: :delete
+              - else
+                / Not signed in
+                %li= link_to "Log in", new_user_session_path
+                %li= link_to "Sign up", new_user_registration_path
 
     .container
       .flash
