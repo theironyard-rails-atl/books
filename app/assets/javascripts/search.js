@@ -15,14 +15,13 @@ $(function(){
   $('.search-book').click(function(){
     $.getJSON('https://www.googleapis.com/books/v1/volumes?q=isbn:' + $('.isbn').val(),
       function(response){
-        if(response.totalItems === 0) {
-          alert("No book found.");
-        }
+        if (response.totalItems === 0) {
+          alert("No results found");
+          }
         else {
           var book = response.items[0].volumeInfo;
-
-          var authors_array = []
-          for(i =0; i < book.authors.length; i ++){
+          var authors_array = [];
+          for (i = 0, length = book.authors.length; i < length; i ++){
             authors_array.push(book.authors[i]);
           }
           var authors = authors_array.join(", ");
@@ -35,8 +34,9 @@ $(function(){
           $('.author').text(authors);
           $('.description').text(description);
           $('.book-saver').slideDown('slow');
-          book_save(title, authors, description, image_url, isbn); }
-      });
+          book_save(title, authors, description, image_url, isbn);
+          }
+      })
     });
   //cancel will hide the book saver menu
   $('.cancel').click(function(){
@@ -53,5 +53,6 @@ $(function(){
       dataType: 'json'
       })
     $('.book-saver').slideUp('slow');
+    $('.isbn').val('');
     });
   });
