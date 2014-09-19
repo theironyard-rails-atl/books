@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
+  has_many :friendships, foreign_key: "source_id"
+  has_many :friends, through: :friendships, source: :target
   has_many :identities
   has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
   has_many :created_books, :class_name => 'Book', :foreign_key => 'created_by'
@@ -53,7 +55,7 @@ class User < ActiveRecord::Base
   #end
 
   def friends
-    target_ids = Friend.where(source_id: id).pluck :target_id
+    target_ids = Friendship.where(source_id: id).pluck :target_id
     User.find target_ids
   end
 
@@ -62,17 +64,17 @@ class User < ActiveRecord::Base
   end
 
   def friend! other
-    Friend.where(source_id: id, target_id: other.id).first_or_create!
+    Friendship.where(source_id: id, target_id: other.id).first_or_create!
   end
 
   def unfriend! other
-    Friend.where(source_id: id, target_id: other.id).delete_all
+    Friendship.where(source_id: id, target_id: other.id).delete_all
   end
 
   # This is the reverse of the friends relation; see
   # the comment above
   def messagable_friends
-    source_ids = Friend.where(target_id: id).pluck :source_id
+    source_ids = Friendship.where(target_id: id).pluck :source_id
     User.find source_ids
   end
 
