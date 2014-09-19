@@ -51,7 +51,13 @@ $(function(){
     $.ajax("/books", {
       type: 'POST',
       data: books,
-      dataType: 'json'
+      dataType: 'json',
+      success: function(book){
+        $('.test').prepend( $('<div class="well">' + '<a href=books/' + book.id + '>' + '<h1>' + book.author
+        +'</a>'+ '<small> by ' + book.author + '</small>'+ '</h1>' +
+        '<img class = "cover" src =' + book.image_url.toString() + '></img>'
+        + '<p>' + book.description + '</p>' + "</div>") );
+      }
       })
     $('.book-saver').slideUp('slow');
     $('.isbn').val('');
