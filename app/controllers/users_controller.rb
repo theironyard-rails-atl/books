@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.includes(:friends)
+    @users = User.all
   end
 
   def show
