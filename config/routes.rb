@@ -15,9 +15,9 @@ Rails.application.routes.draw do
       post :unfriend
     end
   end
-  
+
   get '/friends'         => 'users#friends'
   get '/recommendations' => 'books#recommendations'
 
-  root to: "static_pages#home"
+  root to: "books#index"
 end
