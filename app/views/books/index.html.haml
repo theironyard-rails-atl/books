@@ -1,3 +1,16 @@
+%h4.dropdown.pull-right
+  %a.btn-btn-default{id:"dropdownMenu2", "data-toggle"=> 'dropdown'}
+    Categories
+  %ul.dropdown-menu.dropdown-menu-right{role:'menu', 'aria-labelledby'=>"dropdownMenu2"}
+    - if current_user
+      / Signed in
+      %li= link_to "Classics"
+      %li= link_to "Fiction"
+      %li= link_to "Non-Fiction"
+    - else
+      / Not signed in
+      %li= link_to "Log in", new_user_session_path
+      %li= link_to "Sign up", new_user_registration_path
 %h4 Search for a book by it's ISBN in the text box below
 %input.isbn
 %br

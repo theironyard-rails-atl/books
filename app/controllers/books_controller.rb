@@ -33,9 +33,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new create_params.merge(creator: current_user)
-    if Book.where(isbn: params['book']['isbn']).count > 0
-      return @book.to_json
-    elsif @book.save
+    if @book.save
       render :show
     else
       render_invalid @book
