@@ -14,16 +14,28 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
-    @book = Book.new
   end
 
   def show
     @book = Book.find params[:id]
   end
 
+  def query
+    @book_array = Book.where(isbn: params['isbn'])
+    @book = Book.where(isbn: params['isbn'])[0]
+    @no_book = "no book"
+    if @book_array.count == 0
+      render json: @no_book.to_json
+    elsif @book_array.count != 0
+      render json: @book.to_json
+    end
+  end
+
   def create
     @book = Book.new create_params.merge(creator: current_user)
-    if @book.save
+    if Book.where(isbn: params['book']['isbn']).count > 0
+      return @book.to_json
+    elsif @book.save
       render :show
     else
       render_invalid @book
