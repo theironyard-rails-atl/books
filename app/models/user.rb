@@ -62,4 +62,5 @@ class User < ActiveRecord::Base
     source_ids = Friend.where(target_id: id).pluck :source_id
     User.find source_ids
   end
+
 end

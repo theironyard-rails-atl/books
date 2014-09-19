@@ -29,3 +29,22 @@ img.review_cover {
 .modal-content {
   text-align: center;
 }
+
+.reviews{
+  text-align: center;
+}
+.usreview{
+  margin: 1%;
+}
+
+.learn{
+  margin-top: 5%;
+}
+
+.users{
+  background: lightgray;
+}
+
+.outer{
+  background: steelblue;
+}

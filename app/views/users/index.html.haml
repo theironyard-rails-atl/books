@@ -1,14 +1,10 @@
-.center.hero-unit
-  %h1 User List
-  .form-search
+.row.well.outer
 
-
-.row.well
   .col-md-12
     -@users.each do |u|
-      .row.well
+      .row.well.users
         .col-md-5
-          =image_tag u.gravatar_url
+          =link_to image_tag(u.gravatar_url), user_path(u)
           %h3=u.name || u.email
         .col-md-2
         .col-md-5

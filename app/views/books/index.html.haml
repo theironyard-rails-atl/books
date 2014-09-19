@@ -10,12 +10,13 @@
   %h6.title
   %h6.author
   %h6.description
+  %button.btn.btn-default.show-book Book Page
   %button.btn.btn-default.save-book Save
   %button.btn.btn-warning.cancel Cancel
   %br
   %br
 .test
-  - @books.each do |book|
+  - @books.reverse.each do |book|
     .well
       %h1
         = link_to book.title, book

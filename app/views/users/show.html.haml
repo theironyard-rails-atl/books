@@ -19,9 +19,9 @@
 
 -unless @user.reviews.empty?
   %h4 My Reviews
-  -@user.reviews.each do |review|
-    .col-md-2
-      =image_tag review.book.image_url, class: "review_cover", "data-toggle"=> "tooltip", "data-placement" => "right", title: "#{review.book.title} by #{review.book.author}"
-      %button.btn.btn-info{"data-toggle" => "modal", "data-target" => ".#{review.book.title}"}
+  -@user.reviews.sort_by(&:updated_at).reverse.each do |review|
+    .col-md-2.usreview
+      =link_to image_tag(review.book.image_url, class: "tooltp review_cover", "data-toggle"=> "tooltip", "data-placement" => "right", title: "#{review.book.title} by #{review.book.author}"), book_path(review.book)
+      %button.btn.btn-info.learn{"data-toggle" => "modal", "data-target" => ".#{review.book.title}"}
         Learn More
       =render partial: "modal.html.haml", locals: {review: review}
