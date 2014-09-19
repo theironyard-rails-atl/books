@@ -1,0 +1,17 @@
+.modal.fade{"tabindex" => "-1", "role" => "dialog", "aria-labelledby" => "bookModal", "aria-hidden" => "true"}
+  .modal-dialog.modal-lg
+    .modal-content
+      %h4
+        Title:
+        =review.book.title
+      %h5
+        Author:
+        =review.book.author
+      =image_tag review.book.image_url, {class: "cover"}
+      %p
+        Description:
+        =review.text
+      %p
+        Rating:
+        -review.rating.times do
+          %i.fa.fa-star

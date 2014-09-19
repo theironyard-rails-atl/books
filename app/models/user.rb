@@ -21,7 +21,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   include Gravtastic
-  gravtastic
+  gravtastic size: '250'
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
@@ -62,4 +62,5 @@ class User < ActiveRecord::Base
     source_ids = Friend.where(target_id: id).pluck :source_id
     User.find source_ids
   end
+
 end

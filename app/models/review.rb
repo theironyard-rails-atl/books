@@ -17,4 +17,8 @@ class Review < ActiveRecord::Base
 
   validates_presence_of :user, :book, :text, :rating
   validates_uniqueness_of :book, scope: :user
+
+  def grav_url
+    self.user.gravatar_url
+  end
 end

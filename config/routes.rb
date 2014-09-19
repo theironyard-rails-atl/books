@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   get '/friends'         => 'users#friends'
   get '/recommendations' => 'books#recommendations'
 
-  root to: "static_pages#home"
+  root to: "books#index"
 end

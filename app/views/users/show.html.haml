@@ -1,21 +1,27 @@
-%h2
-  =@user.name
+.profile.row
 
-=image_tag @user.gravatar_url
-%br
+  .col-md-5
+    =image_tag @user.gravatar_url, {class: "avatar"}
+  .col-md-4.well
+    .user_information
+      %h2=@user.name || "Horse with no name"
+      %h4=@user.email
+      %h5="Reviewed #{@user.reviews.count} books."
+      %h5="Has #{@user.friends.count} friends."
+
+      -unless current_user == @user
+        -if current_user.friend?(params[:id])
+          =button_to "Unfriend", unfriend_user_path(@user), :method => :post, :class => "btn btn-primary"
+        -else
+          =button_to "Friend", friend_user_path(@user), :method => :post, :class => "btn btn-primary"
+
 %br
 
--unless current_user == @user
-  -if current_user.friend?(params[:id])
-    =button_to "Unfriend", unfriend_user_path(@user), :method => :post, :class => "btn btn-primary"
-  -else
-    =button_to "Friend", friend_user_path(@user), :method => :post, :class => "btn btn-primary"
-
-%br
-  
 -unless @user.reviews.empty?
-  %h4 Review
-  -@user.reviews.each do |review|
-    .well
-      %p
-        =review.text
+  %h4 My Reviews
+  -@user.reviews.sort_by(&:updated_at).reverse.each do |review|
+    .col-md-2.usreview
+      =link_to image_tag(review.book.image_url, class: "tooltp review_cover", "data-toggle"=> "tooltip", "data-placement" => "right", title: "#{review.book.title} by #{review.book.author}"), book_path(review.book)
+      %button.btn.btn-info.learn{"data-toggle" => "modal", "data-target" => ".#{review.book.title}"}
+        Learn More
+      =render partial: "modal.html.haml", locals: {review: review}
