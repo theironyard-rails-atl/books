@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # before_filter :set_json_format
-  return_json except: :show
+  return_json except: [:show, :index]
 
   def friend
     friend = User.find params[:id]
@@ -20,8 +20,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
-    # render :index
+    @users = User.includes(:friends)
   end
 
   def show
