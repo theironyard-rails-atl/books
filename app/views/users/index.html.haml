@@ -1,3 +1,8 @@
+.center.hero-unit
+  %h1 User List
+  .form-search
+
+
 .row.well
   .col-md-12
     -@users.each do |u|
@@ -15,4 +20,4 @@
             -if current_user.friend?(u.id)
               =button_to "Unfriend", unfriend_user_path(u), :method => :post, :class => "btn btn-danger"
             -else
-              =button_to "Friend User", friend_user_path(u), :method => :post, :class => "btn btn-success"
+              =button_to "Friend", friend_user_path(u), :method => :post, :class => "btn btn-success"
