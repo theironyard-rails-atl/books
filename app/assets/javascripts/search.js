@@ -35,7 +35,6 @@ $(function(){
                }
              else {
                var book = response.items[0].volumeInfo;
-              //  console.log(book);
                var authors_array = [];
                var categories_array = [];
                for (i = 0, length = book.categories.length; i < length; i ++){
@@ -50,7 +49,7 @@ $(function(){
                var image_url = book.imageLinks.thumbnail;
                var isbn = book.industryIdentifiers[0].identifier;
                var categories = categories_array.join(", ");
-              //  console.log(categories);
+               console.log(categories);
                $('.pic').attr('src', image_url);
                $('.title').text(title);
                $('.author').text(authors);
@@ -90,9 +89,10 @@ $(function(){
       data: books,
       dataType: 'json',
       success: function(book){
+        console.log(book);
         $('.test').prepend( $('<div class="well">' + '<a href=books/' + book.id + '>' + '<h1>' + book.title
         +'</a>'+ '<small> by ' + book.author + '</small>'+ '</h1>' +
-        '<img class = "cover" src =' + book.image_url.toString() + '></img>' + '<p>' + book.categories + '</p>' + '<p>' + book.description + '</p>' + "</div>") );//+ '<p>' + book.categories + '</p>'
+        '<img class = "cover" src =' + book.image_url.toString() + '></img>' + '<p>' + book.categories + '</p>' + '<p>' + book.description + '</p>' + "</div>") );
       }
       })
     $('.book-saver').slideUp('slow');
