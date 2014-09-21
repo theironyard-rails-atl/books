@@ -71,7 +71,7 @@ private
 
   def create_params
     params.require(:book).
-      permit(:title, :author, :isbn, :image_url, :description).
+      permit(:title, :author, :isbn, :image_url, :description, :category_id).
       merge(created_by: current_user)
   end
 

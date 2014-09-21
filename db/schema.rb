@@ -24,13 +24,6 @@ ActiveRecord::Schema.define(version: 20140920145441) do
     t.integer  "created_by"
   end
 
-  create_table "books_categories", id: false, force: true do |t|
-    t.integer "book_id",     null: false
-    t.integer "category_id", null: false
-  end
-
-  add_index "books_categories", ["book_id", "category_id"], name: "index_books_categories_on_book_id_and_category_id"
-
   create_table "categories", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"

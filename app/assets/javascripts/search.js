@@ -92,8 +92,7 @@ $(function(){
       success: function(book){
         $('.test').prepend( $('<div class="well">' + '<a href=books/' + book.id + '>' + '<h1>' + book.title
         +'</a>'+ '<small> by ' + book.author + '</small>'+ '</h1>' +
-        '<img class = "cover" src =' + book.image_url.toString() + '></img>'
-         + + '<p>' + book.categories + '</p>' + '<p>' + book.description + '</p>' + "</div>") );//+ '<p>' + book.categories + '</p>'
+        '<img class = "cover" src =' + book.image_url.toString() + '></img>' + '<p>' + book.categories + '</p>' + '<p>' + book.description + '</p>' + "</div>") );//+ '<p>' + book.categories + '</p>'
       }
       })
     $('.book-saver').slideUp('slow');
