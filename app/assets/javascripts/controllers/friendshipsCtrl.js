@@ -15,6 +15,7 @@ app.controller("FriendshipsCtrl", function($scope, $resource) {
   $scope.friends = friendResource.query();
   $scope.users = userResource.query();
   $scope.requests = requestsResource.query();
+
   $scope.request = function() {
     alert('You clicked me');
   };

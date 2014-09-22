@@ -4,7 +4,7 @@ describe 'Friendships', js:true do
   before :each do
     @user = create :user
     login @user
-
+    
     visit friendships_users_path
   end
 
@@ -21,7 +21,7 @@ describe 'Friendships', js:true do
     end
 
     it "should show a user's current friends tab" do
-      expect( page ).to have_content("Friends Listing")
+      expect( page ).to have_content("table")
     end
 
 
