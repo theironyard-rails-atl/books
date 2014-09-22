@@ -29,6 +29,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
+    angular-rails (0.0.12)
+      coffee-script (~> 2.2.0)
+      rails
     arel (5.0.1.20140414130214)
     aws-sdk (1.53.0)
       aws-sdk-v1 (= 1.53.0)
@@ -67,7 +70,7 @@ GEM
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.2.0)
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
@@ -307,6 +310,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  angular-rails
   aws-sdk
   better_errors
   binding_of_caller

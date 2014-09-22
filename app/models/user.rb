@@ -23,6 +23,13 @@ class User < ActiveRecord::Base
   has_many :reviewed_books, through: :reviews, :source => :book, :primary_key => "book_id"
 
 
+  def requests
+    targeted_by = User.joins(:friendships).where(friendships: {target_id: self.id })
+    targets = self.friends
+
+    (targeted_by - targets)
+  end
+
   def self.create_from_omniauth(params)
     attributes = {
       email: params['info']['email'],

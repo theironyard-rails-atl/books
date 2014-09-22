@@ -14,17 +14,19 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
-    # render :index
+    @users = User.all - User.where(id: current_user.id)
   end
 
   def friends
-    @users = current_user.friends
-    render :index
+    @friends = current_user.friends
   end
 
   def friendships
-    @friends = current_user.friends
+    #@friends = current_user.friends
+  end
+
+  def requests
+    @requests = current_user.requests
   end
 
 end

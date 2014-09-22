@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/requests'        => 'users#requests'
   get '/friends'         => 'users#friends'
   get '/recommendations' => 'books#recommendations'
 
