@@ -4,7 +4,7 @@
   %ul.dropdown-menu.dropdown-menu-right{role:'menu', 'aria-labelledby'=>"dropdownMenu2"}
     - if current_user
       - Category.all.each do |category|
-        %li= link_to category.name
+        %li= link_to category.name, category_path(category)
     - else
       / Not signed in
       %li= link_to "Log in", new_user_session_path
