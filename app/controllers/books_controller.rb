@@ -34,6 +34,11 @@ class BooksController < ApplicationController
   def create
     @book = Book.new create_params.merge(creator: current_user)
     if @book.save
+      #category_name = params[:book][:categories]
+      category_names = params[:book][:categories].split(",")
+      category_names.each do |category_name|
+        @book.categories << Category.where(name: category_name).first_or_create!
+      end
       render :show
     else
       render_invalid @book

@@ -4,7 +4,7 @@
 
 %img.cover{ src: @book.image_url }
 
-%h4= @book.category
+%h4= @book.categories.first.name
 %p= @book.description
 
 

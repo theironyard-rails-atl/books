@@ -3,10 +3,8 @@
     Categories
   %ul.dropdown-menu.dropdown-menu-right{role:'menu', 'aria-labelledby'=>"dropdownMenu2"}
     - if current_user
-      / Signed in
-      %li= link_to "Classics"
-      %li= link_to "Fiction"
-      %li= link_to "Non-Fiction"
+      - Category.all.each do |category|
+        %li= link_to category.name
     - else
       / Not signed in
       %li= link_to "Log in", new_user_session_path
